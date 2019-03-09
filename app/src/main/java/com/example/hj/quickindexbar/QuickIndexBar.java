@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class QuickIndexBar extends View {
@@ -62,5 +63,38 @@ public class QuickIndexBar extends View {
         Rect bounds = new Rect();
         paint.getTextBounds(str, 0, str.length(), bounds);
         return bounds.height();
+    }
+
+    private int lastIndex = -1;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                float y = event.getY();
+                //得到触摸点的索引
+                int index = (int) (y / cellHeight);
+                if (index >= 0 && index <= 25) {
+                    if (listener != null)
+                        listener.onTouchLetter(indexArr[index]);
+                }
+                lastIndex = index;
+                break;
+            case MotionEvent.ACTION_UP:
+                lastIndex = -1;
+                break;
+        }
+        return true;
+    }
+
+    private OnTouchLetterListener listener;
+
+    public void setOnTouchLetterListener(OnTouchLetterListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnTouchLetterListener {
+        void onTouchLetter(String letter);
     }
 }
