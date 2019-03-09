@@ -7,9 +7,19 @@
     tools:context=".MainActivity">
 
     <com.example.hj.quickindexbar.QuickIndexBar
+        android:id="@+id/quickIndexBar"
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
-        android:id="@+id/quickIndexBar"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/quickIndexBar"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

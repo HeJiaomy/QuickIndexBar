@@ -37,7 +37,7 @@ public class QuickIndexBar extends View {
     private void init() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.WHITE);
-        paint.setTextSize(32);
+        paint.setTextSize(24);
         paint.setTextAlign(Paint.Align.CENTER);//设置文本的起点是文字底边的中心
     }
 
@@ -54,7 +54,8 @@ public class QuickIndexBar extends View {
         super.onDraw(canvas);
         for (int i = 0; i < indexArr.length; i++) {
             int x = width / 2;
-            float y = cellHeight / 2 + getTextHeight(indexArr[i]) + i * cellHeight;
+            float y = cellHeight / 2 + getTextHeight(indexArr[i])/2 + i * cellHeight;
+            paint.setColor(lastIndex==i?Color.BLACK:Color.WHITE);
             canvas.drawText(indexArr[i], x, y, paint);
         }
     }
@@ -85,6 +86,8 @@ public class QuickIndexBar extends View {
                 lastIndex = -1;
                 break;
         }
+        //引起重绘
+        invalidate();
         return true;
     }
 
