@@ -17,7 +17,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     MyAdapter(List<Friend> friendList, Context context) {
         this.friendList = friendList;
-        this.context= context;
+        this.context = context;
     }
 
     @NonNull
@@ -28,9 +28,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
-        holder.letter.setText(friendList.get(i).getPinyin());
-        holder.name.setText(friendList.get(i).getName());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String currentWord = String.valueOf(friendList.get(position).getPinyin().charAt(0));
+
+        if (position > 0) {
+            //获取上一个item的首字母
+            String lastWord = String.valueOf(friendList.get(position - 1).getPinyin().charAt(0));
+            if (currentWord.equals(lastWord)) {
+                holder.letter.setVisibility(View.GONE);
+            }else {
+                //当前字母与上一个不一样
+                holder.letter.setVisibility(View.VISIBLE);
+                holder.letter.setText(currentWord);
+            }
+        }else {
+            holder.letter.setVisibility(View.VISIBLE);
+            holder.letter.setText(currentWord);
+        }
+        holder.name.setText(friendList.get(position).getName());
     }
 
     @Override
