@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
         quickIndexBar = findViewById(R.id.quickIndexBar);
         recyclerView = findViewById(R.id.recyclerView);
         friends = new ArrayList<>();
+        //设置数据
         fillList();
+        //根据拼音排序
+        Collections.sort(friends);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter(friends, this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, OrientationHelper.HORIZONTAL));
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         friends.add(new Friend("段誉"));
         friends.add(new Friend("段正淳"));
         friends.add(new Friend("张三丰"));
+        friends.add(new Friend("重庆"));
         friends.add(new Friend("陈坤"));
         friends.add(new Friend("林俊杰1"));
         friends.add(new Friend("陈坤2"));
@@ -66,5 +71,6 @@ public class MainActivity extends AppCompatActivity {
         friends.add(new Friend("宋江"));
         friends.add(new Friend("宋江1"));
         friends.add(new Friend("李伟3"));
+        friends.add(new Friend("重要"));
     }
 }

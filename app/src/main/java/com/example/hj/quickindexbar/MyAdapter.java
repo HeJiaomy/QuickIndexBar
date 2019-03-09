@@ -15,7 +15,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Friend> friendList;
     private Context context;
 
-    public MyAdapter(List<Friend> friendList,Context context) {
+    MyAdapter(List<Friend> friendList, Context context) {
         this.friendList = friendList;
         this.context= context;
     }
@@ -29,7 +29,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
-//        holder.letter.setText(friendList.get(i).getPinyin());
+        holder.letter.setText(friendList.get(i).getPinyin());
         holder.name.setText(friendList.get(i).getName());
     }
 
@@ -43,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private final TextView letter;
         private final TextView name;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             letter = itemView.findViewById(R.id.item_friend_letter_tv);
             name = itemView.findViewById(R.id.item_friend_name_tv);
